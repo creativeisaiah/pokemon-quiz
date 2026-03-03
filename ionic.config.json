@@ -1,0 +1,7 @@
+{
+  "name": "pokemon-quiz",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
