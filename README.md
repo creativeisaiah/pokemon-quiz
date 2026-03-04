@@ -123,7 +123,7 @@ Displays all questions from a completed quiz along with:
 - the correct answer
 - the final score
 
----
+<hr/>
 
 ## Project Setup
 
@@ -138,3 +138,80 @@ Install the Ionic CLI if it is not already installed:
 
 ```bash
 npm install -g @ionic/cli
+```
+<hr/>
+
+### Installation
+
+Clone the repository:
+```bash
+git clone https://github.com/creativeisaiah/pokemon-quiz.git
+cd pokemon-quiz
+```
+
+Install dependencies:
+```bash
+npm install
+```
+<hr/>
+
+### Running the Application (Web)
+
+Start the development server:
+```bash
+ionic serve
+```
+
+The application will be available in the browser at:
+```bash
+http://localhost:8100
+```
+<hr/>
+
+## Running the Application on iOS
+
+Build the Angular application:
+```bash
+ionic build
+```
+
+Sync the project with Capacitor:
+```bash
+ionic cap sync ios
+```
+
+Open the iOS project in Xcode:
+```bash
+ionic cap open ios
+```
+From Xcode:
+
+  1) Connect an iPhone or select a simulator
+
+  2) Configure signing under Signing & Capabilities
+
+  3) Press Run to install the application
+
+<hr/>
+
+### Purpose of the Project
+
+This project was created to demonstrate:
+
+- how Angular applications can be adapted for mobile environments
+
+- how Ionic components provide native-style mobile UI
+
+- how Capacitor bridges web applications to native platforms
+
+- how a full mobile development pipeline can be implemented using web technologies
+
+<hr/>
+
+
+
+### &copy; 2026 | Joshua Boyd
+
+
+### <a href="https://www.linkedin.com/in/joshua-boyd-969781140/">LinkedIn<a/> | <a href="https://github.com/creativeisaiah">GitHub<a/> 
+
