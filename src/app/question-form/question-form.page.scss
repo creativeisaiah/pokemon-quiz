@@ -1,0 +1,159 @@
+// src/app/question-form/question-form.page.scss
+$font-heading: 'Bangers', cursive;
+$font-body: 'Lilita One', sans-serif;
+$black: #1a1a1a;
+$white: #fffef5;
+$yellow: #ffe156;
+$red: #ff3b3b;
+$cyan: #24e0d0;
+$border-w: 4px;
+
+ion-content {
+  --background: transparent;
+}
+
+ion-toolbar {
+  --background: #{$black};
+  --color: #{$yellow};
+  font-family: $font-heading;
+
+  ion-title {
+    font-family: $font-heading;
+    font-size: 22px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+}
+
+.form-wrapper {
+  display: grid;
+  gap: 24px;
+  padding: 20px 0;
+  min-height: 100%;
+  background-color: $yellow;
+  background-image: url('/assets/halftone-bg.png');
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 600px 600px;
+}
+
+.form-box {
+  position: relative;
+  background: $white;
+  border: $border-w solid $black;
+  box-shadow: 8px 8px 0 $black;
+  padding: 32px 16px 20px;
+
+  .form-label {
+    position: absolute;
+    top: -14px;
+    left: 16px;
+    background: $cyan;
+    color: $black;
+    font-family: $font-heading;
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 4px 14px;
+    border: 3px solid $black;
+    box-shadow: 3px 3px 0 $black;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+
+.field {
+  margin-bottom: 16px;
+
+  .field-label {
+    display: block;
+    font-family: $font-heading;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: $black;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  ion-input, ion-select {
+    --background: #{$white};
+    --border-color: #{$black};
+    --border-width: 3px;
+    --border-radius: 0;
+    --highlight-color-focused: #{$cyan};
+    font-family: $font-body;
+    font-size: 14px;
+  }
+}
+
+// Save button
+ion-button:not([fill="outline"]) {
+  --border-radius: 0;
+  --background: #{$red};
+  --background-hover: #{$red};
+  --color: #{$white};
+  --box-shadow: 6px 6px 0 0 #{$black};
+  --padding-top: 16px;
+  --padding-bottom: 16px;
+  font-family: $font-heading;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition:
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+
+  &::part(native) {
+    border: $border-w solid $black;
+    border-radius: 0;
+  }
+
+  &:hover {
+    transform: translate(-4px, -4px) rotate(-1deg) scale(1.02);
+    --box-shadow: 10px 10px 0 0 #{$black};
+    filter: brightness(1.08);
+  }
+
+  &:active {
+    transform: translate(4px, 4px) scale(0.97);
+    --box-shadow: 1px 1px 0 0 #{$black};
+    filter: brightness(0.92);
+    transition-duration: 0.05s;
+  }
+}
+
+// Outline buttons
+ion-button[fill="outline"] {
+  --border-radius: 0;
+  --background: #{$white};
+  --color: #{$black};
+  --border-color: #{$black};
+  --border-width: #{$border-w};
+  --box-shadow: 6px 6px 0 0 #{$black};
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  font-family: $font-heading;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition:
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease;
+
+  &::part(native) {
+    border: $border-w solid $black;
+    border-radius: 0;
+  }
+
+  &:hover {
+    transform: translate(-4px, -4px) rotate(1deg) scale(1.02);
+    --box-shadow: 10px 10px 0 0 #{$black};
+    --color: #{$red};
+  }
+
+  &:active {
+    transform: translate(4px, 4px) scale(0.97);
+    --box-shadow: 1px 1px 0 0 #{$black};
+    transition-duration: 0.05s;
+  }
+}

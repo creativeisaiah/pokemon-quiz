@@ -7,7 +7,7 @@ export type CompletedQuiz = {
   score: number;
   total: number;
   items: {
-    questionId: number;
+    questionId: string;          // was number, now string
     question: string;
     options: string[];
     selectedIndex: number;

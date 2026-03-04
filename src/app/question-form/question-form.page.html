@@ -1,0 +1,63 @@
+<!-- src/app/question-form/question-form.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ isEdit ? 'Edit' : 'New' }} Question</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="form-wrapper">
+    <div class="form-box">
+      <span class="form-label">{{ isEdit ? 'Edit Question' : 'Create Question' }}</span>
+
+      <div class="field">
+        <label class="field-label">Question</label>
+        <ion-input
+          [value]="questionText"
+          (ionInput)="questionText = $any($event).detail.value ?? ''"
+          placeholder="e.g. Which type is Pikachu?"
+          fill="outline">
+        </ion-input>
+      </div>
+
+      @for (opt of options; track $index) {
+        <div class="field">
+          <label class="field-label">Option {{ $index + 1 }}</label>
+          <ion-input
+            [value]="opt"
+            (ionInput)="updateOption($index, $any($event).detail.value ?? '')"
+            [placeholder]="'Option ' + ($index + 1)"
+            fill="outline">
+          </ion-input>
+        </div>
+      }
+
+      <div class="field">
+        <label class="field-label">Correct Answer</label>
+        <ion-select
+          [value]="answerIndex"
+          (ionChange)="answerIndex = $any($event).detail.value"
+          interface="popover"
+          fill="outline">
+          @for (opt of options; track $index) {
+            <ion-select-option [value]="$index">
+              Option {{ $index + 1 }}{{ opt ? ': ' + opt : '' }}
+            </ion-select-option>
+          }
+        </ion-select>
+      </div>
+    </div>
+
+    <ion-button expand="block" (click)="save()">
+      {{ isEdit ? 'Update' : 'Create' }} Question
+    </ion-button>
+
+    <ion-button expand="block" fill="outline" routerLink="/question-list">
+      Cancel
+    </ion-button>
+
+    <ion-button expand="block" fill="outline" routerLink="/home">
+      Back Home
+    </ion-button>
+  </div>
+</ion-content>

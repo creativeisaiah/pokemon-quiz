@@ -1,0 +1,49 @@
+<!-- src/app/question-list/question-list.page.html -->
+<ion-header>
+  <ion-toolbar>
+    <ion-title>All Questions</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="question-list">
+    <div class="list-header">
+      <span class="count">{{ questions.length }} Questions</span>
+      <ion-button size="small" routerLink="/question-form">
+        + New
+      </ion-button>
+    </div>
+
+    @if (questions.length === 0) {
+      <div class="empty-box">
+        <span class="empty-icon">📝</span>
+        <h2>No Questions</h2>
+        <p>Create your first question to get started.</p>
+      </div>
+    } @else {
+      <div class="questions">
+        @for (q of questions; track q.id; let i = $index) {
+          <div class="question-row">
+            <span class="row-num">#{{ i + 1 }}</span>
+            <div class="row-content">
+              <p class="row-question">{{ q.question }}</p>
+              <p class="row-answer">Answer: {{ q.options[q.answerIndex] }}</p>
+            </div>
+            <div class="row-actions">
+              <ion-button size="small" [routerLink]="'/question-form/' + q.id">
+                Edit
+              </ion-button>
+              <ion-button size="small" class="delete-btn" (click)="confirmDelete(q)">
+                Del
+              </ion-button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <ion-button expand="block" fill="outline" routerLink="/home">
+      Back Home
+    </ion-button>
+  </div>
+</ion-content>

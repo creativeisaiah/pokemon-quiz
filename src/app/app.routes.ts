@@ -30,4 +30,16 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./quiz-review/quiz-review.page').then((m) => m.QuizReviewPage),
   },
+  {
+    path: 'question-list',
+    loadComponent: () => import('./question-list/question-list.page').then( m => m.QuestionListPage)
+  },
+  {
+    path: 'question-form',
+    loadComponent: () => import('./question-form/question-form.page').then( m => m.QuestionFormPage)
+  },
+  {
+    path: 'question-form/:id',
+    loadComponent: () => import('./question-form/question-form.page').then( m => m.QuestionFormPage)
+  },
 ];
