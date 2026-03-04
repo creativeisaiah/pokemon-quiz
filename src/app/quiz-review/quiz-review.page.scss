@@ -1,0 +1,332 @@
+@use 'sass:color';
+
+$font-heading: 'Bangers', cursive;
+$font-body: 'Lilita One', sans-serif;
+$black: #1a1a1a;
+$white: #fffef5;
+$yellow: #ffe156;
+$red: #ff3b3b;
+$cyan: #24e0d0;
+$pink: #ff6bca;
+$green: #2ecc71;
+$border-w: 4px;
+
+// ── Layout — halftone from bottom-right ──
+.review {
+  display: grid;
+  gap: 24px;
+  padding: 20px 16px;
+  font-family: $font-body;
+  --background: #{$yellow};
+  background-color: $yellow;
+  background-image:
+    linear-gradient(
+      45deg,
+      transparent 0%,
+      transparent 35%,
+      rgba(0, 0, 0, 0.1) 55%,
+      rgba(0, 0, 0, 0.25) 75%,
+      rgba(0, 0, 0, 0.35) 100%
+    ),
+    radial-gradient(circle, $black 2.4px, transparent 2.4px),
+    radial-gradient(circle, $black 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(0, 0, 0, 0.12) 0.8px, transparent 0.8px);
+  background-size:
+    100% 100%,
+    20px 20px,
+    13px 13px,
+    8px 8px;
+  background-position:
+    0 0,
+    0 0,
+    7px 7px,
+    3px 3px;
+}
+
+// ── Toolbar ──
+ion-toolbar {
+  --background: #{$black};
+  --color: #{$yellow};
+  font-family: $font-heading;
+
+  ion-title {
+    font-family: $font-heading;
+    font-size: 22px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+}
+
+// ── Empty state ──
+.empty-box {
+  background: $white;
+  border: $border-w solid $black;
+  box-shadow: 8px 8px 0 $black;
+  padding: 32px 20px;
+  text-align: center;
+  transform: rotate(-0.5deg);
+
+  .empty-icon {
+    display: block;
+    font-size: 48px;
+    margin-bottom: 12px;
+    filter: drop-shadow(3px 3px 0 $black);
+  }
+
+  h2 {
+    margin: 0 0 8px;
+    font-family: $font-heading;
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $black;
+    text-shadow: 2px 2px 0 rgba($cyan, 0.4);
+  }
+
+  p {
+    margin: 0 0 16px;
+    font-family: $font-body;
+    font-size: 14px;
+    line-height: 1.6;
+    color: $black;
+    opacity: 0.65;
+  }
+
+  ion-button {
+    --border-radius: 0;
+    --background: #{$red};
+    --color: #{$white};
+    --box-shadow: 5px 5px 0 0 #{$black};
+    font-family: $font-heading;
+    font-size: 16px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    &::part(native) {
+      border: $border-w solid $black;
+      border-radius: 0;
+    }
+  }
+}
+
+// ── Score box ──
+.score-box {
+  position: relative;
+  background: $white;
+  border: $border-w solid $black;
+  box-shadow: 8px 8px 0 $black;
+  padding: 30px 20px 20px;
+  text-align: center;
+  transform: rotate(-0.5deg);
+
+  .score-label {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $cyan;
+    color: $black;
+    font-family: $font-heading;
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 4px 18px;
+    border: 3px solid $black;
+    box-shadow: 3px 3px 0 $black;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+
+.score {
+  margin: 0 0 6px;
+  font-family: $font-heading;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+
+  .score-num {
+    font-size: 52px;
+    letter-spacing: 2px;
+    color: $red;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  .score-divider {
+    font-size: 30px;
+    color: $black;
+    opacity: 0.4;
+    margin: 0 2px;
+  }
+
+  .score-total {
+    font-size: 30px;
+    color: $black;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+.date {
+  margin: 0;
+  font-family: $font-body;
+  font-size: 13px;
+  color: $black;
+  opacity: 0.5;
+}
+
+// ── Review cards ──
+.review-card {
+  position: relative;
+  background: $white;
+  border: $border-w solid $black;
+  box-shadow: 6px 6px 0 $black;
+  padding: 28px 16px 18px;
+  transition: transform 0.15s ease;
+
+  // alternating tilts
+  &:nth-child(even) { transform: rotate(0.4deg); }
+  &:nth-child(odd)  { transform: rotate(-0.4deg); }
+
+  // left-edge color accent
+  &.was-correct {
+    border-left: 8px solid $green;
+  }
+
+  &.was-wrong {
+    border-left: 8px solid $red;
+  }
+
+  // question number badge
+  .card-badge {
+    position: absolute;
+    top: -12px;
+    left: 14px;
+    background: $yellow;
+    color: $black;
+    font-family: $font-heading;
+    font-size: 13px;
+    letter-spacing: 1px;
+    padding: 3px 12px;
+    border: 3px solid $black;
+    box-shadow: 2px 2px 0 $black;
+    text-transform: uppercase;
+  }
+
+  // ✓ or ✗ badge
+  .card-result {
+    position: absolute;
+    top: -12px;
+    right: 14px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $font-heading;
+    font-size: 16px;
+    border: 3px solid $black;
+    box-shadow: 2px 2px 0 $black;
+  }
+
+  &.was-correct .card-result {
+    background: $green;
+    color: $white;
+  }
+
+  &.was-wrong .card-result {
+    background: $red;
+    color: $white;
+  }
+}
+
+.card-question {
+  margin: 0 0 14px;
+  font-family: $font-heading;
+  font-size: 20px;
+  line-height: 1.3;
+  letter-spacing: 1px;
+  color: $black;
+  text-shadow: 1px 1px 0 rgba($cyan, 0.3);
+}
+
+// ── Answer rows ──
+.answers {
+  display: grid;
+  gap: 10px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.label {
+  font-family: $font-body;
+  font-size: 13px;
+  color: $black;
+  opacity: 0.6;
+}
+
+// ── Custom chips (no ion-chip needed) ──
+.chip {
+  display: inline-block;
+  font-family: $font-heading;
+  font-size: 14px;
+  letter-spacing: 1px;
+  padding: 5px 14px;
+  border: 3px solid $black;
+  box-shadow: 3px 3px 0 $black;
+
+  &.good {
+    background: color.adjust($green, $alpha: -0.8);
+    color: color.adjust($green, $lightness: -15%);
+  }
+
+  &.bad {
+    background: color.adjust($red, $alpha: -0.8);
+    color: color.adjust($red, $lightness: -10%);
+  }
+}
+
+// ── Back button ──
+ion-button[fill="outline"] {
+  --border-radius: 0;
+  --background: #{$white};
+  --background-hover: #{$white};
+  --background-activated: #f0eddf;
+  --color: #{$black};
+  --border-color: #{$black};
+  --border-width: #{$border-w};
+  --box-shadow: 6px 6px 0 0 #{$black};
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  font-family: $font-heading;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition:
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+
+  &::part(native) {
+    border: $border-w solid $black;
+    border-radius: 0;
+  }
+
+  &:hover {
+    transform: translate(-4px, -4px) rotate(1deg) scale(1.02);
+    --box-shadow: 10px 10px 0 0 #{$black};
+    --color: #{$red};
+    filter: brightness(1.02);
+  }
+
+  &:active {
+    transform: translate(4px, 4px) rotate(-0.5deg) scale(0.97);
+    --box-shadow: 1px 1px 0 0 #{$black};
+    filter: brightness(0.95);
+    transition-duration: 0.05s;
+  }
+}

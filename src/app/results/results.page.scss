@@ -1,0 +1,282 @@
+
+
+$font-heading: 'Bangers', cursive;
+$font-body: 'Lilita One', sans-serif;
+$black: #1a1a1a;
+$white: #fffef5;
+$yellow: #ffe156;
+$red: #ff3b3b;
+$cyan: #24e0d0;
+$pink: #ff6bca;
+$border-w: 4px;
+
+// ── Layout — halftone from top-left ──
+.results {
+  display: grid;
+  gap: 28px;
+  padding: 20px 16px;
+  font-family: $font-body;
+  --background: #{$yellow};
+  background-color: $yellow;
+  background-image:
+    linear-gradient(
+      135deg,
+      rgba(0, 0, 0, 0.35) 0%,
+      rgba(0, 0, 0, 0.15) 30%,
+      transparent 55%,
+      transparent 100%
+    ),
+    radial-gradient(circle, $black 2.4px, transparent 2.4px),
+    radial-gradient(circle, $black 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(0, 0, 0, 0.12) 0.8px, transparent 0.8px);
+  background-size:
+    100% 100%,
+    20px 20px,
+    13px 13px,
+    8px 8px;
+  background-position:
+    0 0,
+    0 0,
+    7px 7px,
+    3px 3px;
+}
+
+// ── Toolbar ──
+ion-toolbar {
+  --background: #{$black};
+  --color: #{$yellow};
+  font-family: $font-heading;
+
+  ion-title {
+    font-family: $font-heading;
+    font-size: 22px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+}
+
+// ── Empty state ──
+.empty-box {
+  background: $white;
+  border: $border-w solid $black;
+  box-shadow: 8px 8px 0 $black;
+  padding: 32px 20px;
+  text-align: center;
+  transform: rotate(-0.5deg);
+
+  .empty-icon {
+    display: block;
+    font-size: 48px;
+    margin-bottom: 12px;
+    filter: drop-shadow(3px 3px 0 $black);
+  }
+
+  h2 {
+    margin: 0 0 8px;
+    font-family: $font-heading;
+    font-size: 24px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: $black;
+    text-shadow: 2px 2px 0 rgba($cyan, 0.4);
+  }
+
+  p {
+    margin: 0;
+    font-family: $font-body;
+    font-size: 14px;
+    line-height: 1.6;
+    color: $black;
+    opacity: 0.65;
+  }
+}
+
+// ── Results list ──
+.results-list {
+  display: grid;
+  gap: 14px;
+}
+
+// ── Individual result row ──
+.result-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: $white;
+  border: $border-w solid $black;
+  box-shadow: 5px 5px 0 $black;
+  padding: 14px 16px;
+  cursor: pointer;
+  transition:
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+
+  &:hover {
+    transform: translate(-3px, -3px) rotate(-0.5deg) scale(1.01);
+    box-shadow: 8px 8px 0 $black;
+    filter: brightness(1.03);
+
+    .row-arrow {
+      transform: translateX(4px);
+      color: $red;
+    }
+  }
+
+  &:active {
+    transform: translate(3px, 3px) scale(0.98);
+    box-shadow: 1px 1px 0 $black;
+    filter: brightness(0.95);
+    transition-duration: 0.05s;
+  }
+
+  // alternating subtle tilt
+  &:nth-child(even) {
+    transform: rotate(0.3deg);
+
+    &:hover {
+      transform: translate(-3px, -3px) rotate(0.5deg) scale(1.01);
+    }
+
+    &:active {
+      transform: translate(3px, 3px) rotate(0deg) scale(0.98);
+    }
+  }
+
+  &:nth-child(odd) {
+    transform: rotate(-0.3deg);
+  }
+}
+
+// ── Rank badge ──
+.row-rank {
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $cyan;
+  border: 3px solid $black;
+  box-shadow: 2px 2px 0 $black;
+  font-family: $font-heading;
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: $black;
+}
+
+// ── Score + date ──
+.row-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.row-score {
+  font-family: $font-heading;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: $black;
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.1);
+
+  .row-total {
+    font-size: 16px;
+    opacity: 0.5;
+  }
+}
+
+.row-date {
+  font-family: $font-body;
+  font-size: 12px;
+  color: $black;
+  opacity: 0.5;
+}
+
+// ── Arrow ──
+.row-arrow {
+  font-size: 16px;
+  color: $black;
+  opacity: 0.4;
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+// ── Buttons ──
+.clear-btn {
+  --border-radius: 0;
+  --background: #{$red};
+  --background-hover: #{$red};
+  --background-activated: color.scale($color, $lightness: -19.4904458599%)
+[ng]   color.adjust($color, $lightness: -12%);
+  --color: #{$white};
+  --box-shadow: 6px 6px 0 0 #{$black};
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  font-family: $font-heading;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition:
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+
+  &::part(native) {
+    border: $border-w solid $black;
+    border-radius: 0;
+  }
+
+  &:hover {
+    transform: translate(-4px, -4px) rotate(-1deg) scale(1.02);
+    --box-shadow: 10px 10px 0 0 #{$black};
+    filter: brightness(1.08);
+  }
+
+  &:active {
+    transform: translate(4px, 4px) rotate(0.5deg) scale(0.97);
+    --box-shadow: 1px 1px 0 0 #{$black};
+    filter: brightness(0.92);
+    transition-duration: 0.05s;
+  }
+}
+
+ion-button[fill="outline"] {
+  --border-radius: 0;
+  --background: #{$white};
+  --background-hover: #{$white};
+  --background-activated: #f0eddf;
+  --color: #{$black};
+  --border-color: #{$black};
+  --border-width: #{$border-w};
+  --box-shadow: 6px 6px 0 0 #{$black};
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  margin-top: 40px;
+  font-family: $font-heading;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition:
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+
+  &::part(native) {
+    border: $border-w solid $black;
+    border-radius: 0;
+  }
+
+  &:hover {
+    transform: translate(-4px, -4px) rotate(1deg) scale(1.02);
+    --box-shadow: 10px 10px 0 0 #{$black};
+    --color: #{$red};
+    filter: brightness(1.02);
+  }
+
+  &:active {
+    transform: translate(4px, 4px) rotate(-0.5deg) scale(0.97);
+    --box-shadow: 1px 1px 0 0 #{$black};
+    filter: brightness(0.95);
+    transition-duration: 0.05s;
+  }
+}

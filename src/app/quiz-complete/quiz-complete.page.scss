@@ -1,0 +1,225 @@
+@use 'sass:color';
+
+$font-heading: 'Bangers', cursive;
+$font-body: 'Lilita One', sans-serif;
+$black: #1a1a1a;
+$white: #fffef5;
+$yellow: #ffe156;
+$red: #ff3b3b;
+$cyan: #24e0d0;
+$pink: #ff6bca;
+$border-w: 4px;
+
+// ── Layout — halftone from top-right corner ──
+.complete {
+  display: grid;
+  gap: 32px;
+  padding: 20px 16px;
+  font-family: $font-body;
+  --background: #{$yellow};
+  background-color: $yellow;
+  background-image:
+    linear-gradient(
+      315deg,
+      transparent 0%,
+      transparent 40%,
+      rgba(0, 0, 0, 0.1) 60%,
+      rgba(0, 0, 0, 0.28) 80%,
+      rgba(0, 0, 0, 0.38) 100%
+    ),
+    radial-gradient(circle, $black 2.4px, transparent 2.4px),
+    radial-gradient(circle, $black 1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(0, 0, 0, 0.12) 0.8px, transparent 0.8px);
+  background-size:
+    100% 100%,
+    20px 20px,
+    13px 13px,
+    8px 8px;
+  background-position:
+    0 0,
+    0 0,
+    7px 7px,
+    3px 3px;
+}
+
+// ── Toolbar ──
+ion-toolbar {
+  --background: #{$black};
+  --color: #{$yellow};
+  font-family: $font-heading;
+
+  ion-title {
+    font-family: $font-heading;
+    font-size: 22px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
+}
+
+// ── Trophy ──
+.trophy {
+  text-align: center;
+  font-size: 64px;
+  line-height: 1;
+  margin-top: 12px;
+  animation: trophy-bounce 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  filter: drop-shadow(4px 4px 0 $black);
+}
+
+@keyframes trophy-bounce {
+  0%   { transform: scale(0) rotate(-15deg); opacity: 0; }
+  60%  { transform: scale(1.15) rotate(5deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+// ── Result box ──
+.result-box {
+  position: relative;
+  background: $white;
+  border: $border-w solid $black;
+  box-shadow: 8px 8px 0 $black;
+  padding: 32px 20px 24px;
+  text-align: center;
+  transform: rotate(-0.5deg);
+
+  // floating label badge
+  .result-label {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $cyan;
+    color: $black;
+    font-family: $font-heading;
+    font-size: 14px;
+    letter-spacing: 2px;
+    padding: 4px 18px;
+    border: 3px solid $black;
+    box-shadow: 3px 3px 0 $black;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+}
+
+// ── Score display ──
+.score {
+  margin: 0 0 10px;
+  font-family: $font-heading;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 4px;
+
+  .score-num {
+    font-size: 64px;
+    letter-spacing: 2px;
+    color: $red;
+    text-shadow: 3px 3px 0 rgba(0, 0, 0, 0.2);
+    animation: score-slam 0.5s 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+  }
+
+  .score-divider {
+    font-size: 36px;
+    color: $black;
+    opacity: 0.4;
+    margin: 0 2px;
+  }
+
+  .score-total {
+    font-size: 36px;
+    color: $black;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.1);
+  }
+}
+
+@keyframes score-slam {
+  0%   { transform: scale(2.5) rotate(-5deg); opacity: 0; }
+  60%  { transform: scale(0.95) rotate(1deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); }
+}
+
+.date {
+  margin: 0;
+  font-family: $font-body;
+  font-size: 14px;
+  color: $black;
+  opacity: 0.55;
+}
+
+.fallback {
+  margin: 0;
+  font-family: $font-body;
+  font-size: 16px;
+  color: $black;
+  opacity: 0.7;
+}
+
+// ── Action buttons ──
+.actions {
+  display: grid;
+  gap: 22px;
+
+  ion-button {
+    --border-radius: 0;
+    --box-shadow: 6px 6px 0 0 #{$black};
+    --padding-top: 16px;
+    --padding-bottom: 16px;
+    margin: 0;
+    font-family: $font-heading;
+    font-size: 18px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition:
+      transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+      box-shadow 0.15s ease,
+      filter 0.15s ease;
+
+    --background: #{$red};
+    --background-hover: #{$red};
+    --background-activated: color.adjust($red, $lightness: -10%);
+    --color: #{$white};
+
+    &::part(native) {
+      border: $border-w solid $black;
+      border-radius: 0;
+    }
+
+    &:hover {
+      transform: translate(-4px, -4px) rotate(-1deg) scale(1.02);
+      --box-shadow: 10px 10px 0 0 #{$black};
+      filter: brightness(1.08);
+    }
+
+    &:active {
+      transform: translate(4px, 4px) rotate(0.5deg) scale(0.97);
+      --box-shadow: 1px 1px 0 0 #{$black};
+      filter: brightness(0.92);
+      transition-duration: 0.05s;
+    }
+
+    // outline variant
+    &[fill="outline"] {
+      --background: #{$white};
+      --background-hover: #{$white};
+      --background-activated: #f0eddf;
+      --color: #{$black};
+      --border-color: #{$black};
+      --border-width: #{$border-w};
+      --box-shadow: 6px 6px 0 0 #{$black};
+
+      &:hover {
+        transform: translate(-4px, -4px) rotate(1deg) scale(1.02);
+        --box-shadow: 10px 10px 0 0 #{$black};
+        --color: #{$red};
+        filter: brightness(1.02);
+      }
+
+      &:active {
+        transform: translate(4px, 4px) rotate(-0.5deg) scale(0.97);
+        --box-shadow: 1px 1px 0 0 #{$black};
+        filter: brightness(0.95);
+        transition-duration: 0.05s;
+      }
+    }
+  }
+}

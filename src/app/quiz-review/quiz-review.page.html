@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Review</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding review">
+  @if (!quiz) {
+    <div class="empty-box">
+      <span class="empty-icon">🔍</span>
+      <h2>Quiz Not Found</h2>
+      <p>That result may have been cleared.</p>
+      <ion-button expand="block" routerLink="/results">Back to Results</ion-button>
+    </div>
+  } @else {
+    <div class="score-box">
+      <span class="score-label">Final Score</span>
+      <p class="score">
+        <span class="score-num">{{ quiz.score }}</span>
+        <span class="score-divider">/</span>
+        <span class="score-total">{{ quiz.total }}</span>
+      </p>
+      <p class="date">{{ quiz.date | date:'medium' }}</p>
+    </div>
+
+    @for (item of quiz.items; track item.questionId; let i = $index) {
+      <div class="review-card" [class.was-correct]="isCorrect(item.selectedIndex, item.correctIndex)"
+                               [class.was-wrong]="!isCorrect(item.selectedIndex, item.correctIndex)">
+        <span class="card-badge">Q{{ i + 1 }}</span>
+        <span class="card-result">{{ isCorrect(item.selectedIndex, item.correctIndex) ? '✓' : '✗' }}</span>
+
+        <h3 class="card-question">{{ item.question }}</h3>
+
+        <div class="answers">
+          <div class="row">
+            <span class="label">You said:</span>
+            <span class="chip"
+                  [class.good]="isCorrect(item.selectedIndex, item.correctIndex)"
+                  [class.bad]="!isCorrect(item.selectedIndex, item.correctIndex)">
+              {{ item.options[item.selectedIndex] }}
+            </span>
+          </div>
+
+          <div class="row">
+            <span class="label">Correct:</span>
+            <span class="chip good">
+              {{ item.options[item.correctIndex] }}
+            </span>
+          </div>
+        </div>
+      </div>
+    }
+
+    <ion-button expand="block" fill="outline" routerLink="/results">
+      Back to Results
+    </ion-button>
+  }
+</ion-content>

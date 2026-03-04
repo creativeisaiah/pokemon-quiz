@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Complete</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding complete">
+  <div class="trophy">🏆</div>
+
+  <div class="result-box">
+    <span class="result-label">Final Score</span>
+
+    @if (lastQuiz) {
+      <p class="score">
+        <span class="score-num">{{ lastQuiz.score }}</span>
+        <span class="score-divider">/</span>
+        <span class="score-total">{{ lastQuiz.total }}</span>
+      </p>
+      <p class="date">{{ lastQuiz.date | date:'medium' }}</p>
+    } @else {
+      <p class="fallback">Done! (No saved quiz found.)</p>
+    }
+  </div>
+
+  <div class="actions">
+    <ion-button expand="block" (click)="review()" [disabled]="!lastId">
+      Review This Quiz
+    </ion-button>
+
+    <ion-button expand="block" fill="outline" routerLink="/home">
+      Back Home
+    </ion-button>
+  </div>
+</ion-content>

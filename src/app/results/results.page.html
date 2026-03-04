@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Results</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding results">
+  @if (quizzes.length === 0) {
+    <div class="empty-box">
+      <span class="empty-icon">📭</span>
+      <h2>No Quizzes Yet</h2>
+      <p>Take your first quiz and your results will show up here.</p>
+    </div>
+  } @else {
+    <div class="results-list">
+      @for (q of quizzes; track q.id; let i = $index) {
+        <div class="result-row" (click)="open(q.id)">
+          <span class="row-rank">#{{ i + 1 }}</span>
+          <div class="row-info">
+            <span class="row-score">
+              {{ q.score }}<span class="row-total">/{{ q.total }}</span>
+            </span>
+            <span class="row-date">{{ q.date | date:'medium' }}</span>
+          </div>
+          <span class="row-arrow">▶</span>
+        </div>
+      }
+    </div>
+
+    <ion-button expand="block" class="clear-btn" (click)="clear()">
+      Clear History
+    </ion-button>
+  }
+
+  <ion-button expand="block" fill="outline" routerLink="/home">
+    Home
+  </ion-button>
+</ion-content>

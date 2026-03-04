@@ -1,27 +1,158 @@
-#container {
+// ── Import a bold comic-style font ──
+@use 'sass:color';
+
+$font-heading: 'Bangers', cursive;
+$font-body: 'Lilita One', sans-serif;
+$black: #1a1a1a;
+$white: #fffef5;
+$yellow: #ffe156;
+$red: #ff3b3b;
+$cyan: #24e0d0;
+$pink: #ff6bca;
+$border-w: 4px;
+
+ion-content {
+  --background: transparent;
+}
+
+.home {
+  display: grid;
+  gap: 40px;
+  background-color: $yellow;
+  background-image: url('/assets/halftone-bg.png');
+  background-size: 600px 600px;
+  background-position: bottom center;
+  background-repeat: no-repeat;
+}
+
+// ── Hero ──
+.hero {
   text-align: center;
+  margin-top: 28px;
+  padding: 20px 16px 24px;
+  background: $white;
+  border: $border-w solid $black;
+  box-shadow: 8px 8px 0 $black;
+  transform: rotate(-1deg);
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  h1 {
+    margin: 0 0 10px;
+    font-family: $font-heading;
+    font-size: 38px;
+    line-height: 1.1;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: $black;
+    text-shadow: 3px 3px 0 $cyan;
+    transform: rotate(1deg);
+
+    &::after {
+      content: '⚡';
+      display: inline-block;
+      margin-left: 6px;
+      font-size: 28px;
+      animation: zap 0.6s ease-in-out infinite alternate;
+    }
+  }
+
+  p {
+    margin: 0;
+    font-family: $font-body;
+    font-size: 15px;
+    line-height: 1.5;
+    color: $black;
+    opacity: 0.75;
+  }
 }
 
-#container strong {
+@keyframes zap {
+  from { transform: scale(1) rotate(0deg); }
+  to   { transform: scale(1.15) rotate(8deg); }
+}
+
+// ── Buttons — big spacing + dynamic animations ──
+ion-button {
+  --border-radius: 0;
+  --box-shadow: 6px 6px 0 0 #{$black};
+  --padding-top: 18px;
+  --padding-bottom: 18px;
+  margin-top: 30px;
+  margin-bottom: 10px;
+  font-family: $font-heading;
   font-size: 20px;
-  line-height: 26px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  position: relative;
+  transition:
+    transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 0.15s ease,
+    filter 0.15s ease;
+
+  --background: #{$red};
+  --background-hover: #{$red};
+  --background-activated: color: color.adjust($red, $lightness: -10%);
+  --color: #{$white};
+
+  &::part(native) {
+    border: $border-w solid $black;
+    border-radius: 0;
+    transition: background 0.15s ease;
+  }
+
+  // ── Hover: lift up, grow shadow, slight tilt ──
+  &:hover {
+    transform: translate(-4px, -4px) rotate(-1deg) scale(1.02);
+    --box-shadow: 10px 10px 0 0 #{$black};
+    filter: brightness(1.08);
+  }
+
+  // ── Press: slam down hard, squish, flash color ──
+  &:active {
+    transform: translate(4px, 4px) rotate(0.5deg) scale(0.97);
+    --box-shadow: 1px 1px 0 0 #{$black};
+    filter: brightness(0.92);
+    transition-duration: 0.05s;   // snap down instantly
+  }
+
+  // ── Outline variant ──
+  &[fill="outline"] {
+    --background: #{$white};
+    --background-hover: #{$white};
+    --background-activated: #f0eddf;
+    --color: #{$black};
+    --border-color: #{$black};
+    --border-width: #{$border-w};
+    --box-shadow: 6px 6px 0 0 #{$black};
+
+    &:hover {
+      transform: translate(-4px, -4px) rotate(1deg) scale(1.02);
+      --box-shadow: 10px 10px 0 0 #{$black};
+      --color: #{$red};
+      filter: brightness(1.02);
+    }
+
+    &:active {
+      transform: translate(4px, 4px) rotate(-0.5deg) scale(0.97);
+      --box-shadow: 1px 1px 0 0 #{$black};
+      filter: brightness(0.95);
+      transition-duration: 0.05s;
+    }
+  }
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
+// ── Toolbar ──
+ion-toolbar {
+  --background: #{$black};
+  --color: #{$yellow};
+  font-family: $font-heading;
 
-  color: #8c8c8c;
-
-  margin: 0;
+  ion-title {
+    font-family: $font-heading;
+    font-size: 22px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+  }
 }
 
-#container a {
-  text-decoration: none;
-}
+
+

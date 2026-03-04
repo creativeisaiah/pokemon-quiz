@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Quiz</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding quiz">
+  <div class="progress-wrapper">
+    <ion-progress-bar [value]="progress"></ion-progress-bar>
+    <div class="meta">
+      <span>Question {{ index() + 1 }} / {{ total }}</span>
+    </div>
+  </div>
+
+  <div class="question-box">
+    <span class="question-label">Q{{ index() + 1 }}</span>
+    <h2>{{ current.question }}</h2>
+  </div>
+
+  <div class="options">
+    @for (opt of current.options; track $index) {
+      <ion-button expand="block" (click)="select($index)">
+        {{ opt }}
+      </ion-button>
+    }
+  </div>
+
+  <ion-button expand="block" class="home-btn" routerLink="/home">
+    Home
+  </ion-button>
+</ion-content>
